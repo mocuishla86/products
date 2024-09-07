@@ -103,4 +103,14 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
         var getResponse = await client.GetAsync($"/products/{productId}");
         getResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
+
+    [Fact]
+    public async Task DeletingAnUnexistingProductReturns404()
+    {
+        Guid nonExistingUuid = Guid.NewGuid();
+        var updateRespose = await client.DeleteAsync($"/products/{nonExistingUuid}");
+
+        updateRespose.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        (await updateRespose.Content.ReadAsStringAsync()).Should().Contain(nonExistingUuid.ToString());
+    }
 }

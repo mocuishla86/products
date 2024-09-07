@@ -82,8 +82,7 @@ namespace ProductsAPI.Controllers
             }
             catch (ProductNotFoundException productNotFoundException)
             {
-                return Ok();
-               // return NotFound(productNotFoundException.Message);
+               return NotFound(productNotFoundException.Message);
             };
         }
     }
