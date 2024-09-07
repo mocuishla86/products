@@ -22,14 +22,14 @@ namespace ProductsSqlServer
             return products;
         }
 
-        public Product? GetById(Guid productId)
+        public Product GetById(Guid productId)
         {
-            return products.SingleOrDefault(product => product.Id == productId);
+            return products.SingleOrDefault(product => product.Id == productId) ?? throw new ProductNotFoundException(productId);
         }
 
         public void Update(Product product)
         {
-            Product retrievedProduct = GetById(product.Id) ?? throw new ProductNotFoundException(product.Id);
+            Product retrievedProduct = GetById(product.Id);
             retrievedProduct.Price = product.Price;
             retrievedProduct.Name = product.Name;
         }

@@ -60,13 +60,15 @@ namespace ProductsAPI.Controllers
         [HttpGet("{productId}", Name = "Get product by id")]
         public ActionResult<Product> GetProductById(Guid productId)
         {
-            Product? product = getProductByIdUseCase.GetProductById(new GetProductByIdUseCase.Query { ProductId = productId});
-            if (product == null)
+            try
             {
-                return NotFound();
+                Product product = getProductByIdUseCase.GetProductById(new GetProductByIdUseCase.Query { ProductId = productId });
+                return Ok(product);
             }
-
-            return Ok(product);
+            catch (ProductNotFoundException productNotFoundException)
+            {
+                return NotFound(productNotFoundException.Message);
+            };
         }
     }
 }

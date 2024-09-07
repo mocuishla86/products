@@ -5,7 +5,7 @@ namespace ProductsApplication.Inbound
 {
     public class GetProductByIdUseCase(IProductRepository repository)
     {
-        public Product? GetProductById(Query query)
+        public Product GetProductById(Query query)
         {
             return repository.GetById(query.ProductId);
         }

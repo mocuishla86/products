@@ -6,7 +6,7 @@ namespace ProductsApplication.Outbound
     {
         void Insert(Product product);
         List<Product> GetAllProducts();
-        Product? GetById(Guid productId);
+        Product GetById(Guid productId);
         void Update(Product product);
     }
 }
