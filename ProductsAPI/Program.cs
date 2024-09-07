@@ -1,4 +1,6 @@
-using ProductsApplication;
+using ProductsApplication.Inbound;
+using ProductsApplication.Outbound;
+using ProductsSqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<GetWeatherForecastUseCase>();
+builder.Services.AddSingleton<IWeatherForecastRepository, InMemoryWeatherForecastRepository>();
 
 var app = builder.Build();
 

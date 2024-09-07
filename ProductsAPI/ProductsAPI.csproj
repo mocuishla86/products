@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ProductsApplication\ProductsApplication.csproj" />
     <ProjectReference Include="..\ProductsDomain\ProductsDomain.csproj" />
+    <ProjectReference Include="..\ProductsSqlServer\ProductsSqlServer.csproj" />
   </ItemGroup>
 
 </Project>

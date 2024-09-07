@@ -1,8 +1,9 @@
-﻿using ProductsDomain;
+﻿using ProductsApplication.Outbound;
+using ProductsDomain;
 
-namespace ProductsApplication
+namespace ProductsSqlServer
 {
-    public class GetWeatherForecastUseCase
+    public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
     {
         public List<WeatherForecast> GetWeatherForecast()
         {

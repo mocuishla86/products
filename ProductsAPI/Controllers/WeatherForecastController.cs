@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ProductsApplication;
+using ProductsApplication.Inbound;
 using ProductsDomain;
 
 namespace ProductsAPI.Controllers
