@@ -7,20 +7,23 @@ namespace ProductsAPI.Controllers
 {
     [ApiController]
     [Route("products")]
-    public class ProductController : ControllerBase
+    public class ProductController(CreateProductUseCase createProductUseCase) : ControllerBase
     {
 
         [HttpPost(Name = "Create product")]
         public ActionResult<Product> Create(CreateProductRequestDto request)
         {
-            Product product = new Product()
+            CreateProductUseCase.Command command = new()
             {
-                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Price = request.Price,
             };
+
+            Product product = createProductUseCase.CreateProduct(command);
             var uri = Url.Action("Get product", new { id = product.Id });
             return Created(uri, product);
         }
+
+        
     }
 }

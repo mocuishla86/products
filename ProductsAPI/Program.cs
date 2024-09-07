@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<GetWeatherForecastUseCase>();
+builder.Services.AddSingleton<CreateProductUseCase>();
 builder.Services.AddSingleton<IWeatherForecastRepository, InMemoryWeatherForecastRepository>();
 
 var app = builder.Build();
