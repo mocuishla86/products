@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using FunctionalTest;
-using ProductsAPI;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
+using ProductsDomain;
 
 namespace ProductsAPITest;
 [ExcludeFromCodeCoverage]
