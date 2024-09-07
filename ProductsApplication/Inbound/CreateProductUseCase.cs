@@ -1,8 +1,9 @@
-﻿using ProductsDomain;
+﻿using ProductsApplication.Outbound;
+using ProductsDomain;
 
 namespace ProductsApplication.Inbound
 {
-    public class CreateProductUseCase
+    public class CreateProductUseCase(IProductRepository repository)
     {
         public class Command
         {
@@ -12,12 +13,15 @@ namespace ProductsApplication.Inbound
 
         public Product CreateProduct(Command command)
         {
-            Product product = new Product()
+            Product product = new()
             {
                 Id = Guid.NewGuid(),
                 Name = command.Name,
                 Price = command.Price,
             };
+
+            repository.Insert(product);
+
             return product;
         }
     }
