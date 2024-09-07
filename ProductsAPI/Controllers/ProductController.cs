@@ -10,7 +10,8 @@ namespace ProductsAPI.Controllers
     public class ProductController(
         CreateProductUseCase createProductUseCase, 
         GetAllProductsUseCase getAllProductsUseCase,
-        GetProductByIdUseCase getProductByIdUseCase
+        GetProductByIdUseCase getProductByIdUseCase,
+        UpdateProductUseCase updateProductUseCase
         ) : ControllerBase
     {
 
@@ -26,6 +27,21 @@ namespace ProductsAPI.Controllers
             Product product = createProductUseCase.CreateProduct(command);
             var uri = Url.Action("Get product by id", new { id = product.Id });
             return Created(uri, product);
+        }
+
+        [HttpPut("{productId}",Name = "Update product")]
+        public ActionResult<Product> Update(Guid productId, UpdateProductRequestDto request)
+        {
+            UpdateProductUseCase.Command command = new()
+            {
+                Id = productId,
+                Name = request.Name,
+                Price = request.Price,
+            };
+
+            Product product = updateProductUseCase.UpdateProduct(command);
+
+            return Ok(product);
         }
 
         [HttpGet(Name = "Get products")]

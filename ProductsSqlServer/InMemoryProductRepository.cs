@@ -25,5 +25,12 @@ namespace ProductsSqlServer
         {
             return products.SingleOrDefault(product => product.Id == productId);
         }
+
+        public void Update(Product product)
+        {
+            Product? retrievedProduct = GetById(product.Id);
+            retrievedProduct.Price = product.Price;
+            retrievedProduct.Name = product.Name;
+        }
     }
 }

@@ -63,4 +63,20 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
 
         nonExistingProductResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
+
+    [Fact]
+    public async Task AProductCanBeUpdated()
+    {
+        var createResponse = await client.PostAsJsonAsync("/products", new CreateProductRequestDto { Name = "Mazda CX-5", Price = 40000 });
+        var createdProduct = JsonConvert.DeserializeObject<Product>(await createResponse.Content.ReadAsStringAsync());
+        var productId = createdProduct.Id;
+
+        var updateRespose = await client.PutAsJsonAsync($"/products/{productId}", new UpdateProductRequestDto { Name = "New Mazda CX-5", Price = 38000 });
+
+        updateRespose.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var retrievedProduct = await client.GetFromJsonAsync<Product>($"/products/{productId}");
+        retrievedProduct.Id.Should().Be(productId);
+        retrievedProduct.Name.Should().Be("New Mazda CX-5");
+        retrievedProduct.Price.Should().Be(38000);
+    }
 }
