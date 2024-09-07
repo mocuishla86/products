@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<GetWeatherForecastUseCase>();
 builder.Services.AddSingleton<CreateProductUseCase>();
 builder.Services.AddSingleton<GetAllProductsUseCase>();
+builder.Services.AddSingleton<GetProductByIdUseCase>();
 builder.Services.AddSingleton<IWeatherForecastRepository, InMemoryWeatherForecastRepository>();
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 

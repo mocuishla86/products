@@ -20,5 +20,10 @@ namespace ProductsSqlServer
         {
             return products;
         }
+
+        public Product GetById(Guid productId)
+        {
+            return products.Single(product => product.Id == productId);
+        }
     }
 }

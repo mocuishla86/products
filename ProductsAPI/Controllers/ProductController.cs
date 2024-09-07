@@ -6,10 +6,12 @@ using ProductsDomain;
 namespace ProductsAPI.Controllers
 {
     [ApiController]
-    [Route("products")]
+    [Route("/products")]
     public class ProductController(
         CreateProductUseCase createProductUseCase, 
-        GetAllProductsUseCase getAllProductsUseCase) : ControllerBase
+        GetAllProductsUseCase getAllProductsUseCase,
+        GetProductByIdUseCase getProductByIdUseCase
+        ) : ControllerBase
     {
 
         [HttpPost(Name = "Create product")]
@@ -22,14 +24,22 @@ namespace ProductsAPI.Controllers
             };
 
             Product product = createProductUseCase.CreateProduct(command);
-            var uri = Url.Action("Get product", new { id = product.Id });
+            var uri = Url.Action("Get product by id", new { id = product.Id });
             return Created(uri, product);
         }
 
-        [HttpGet(Name = "Get Products")]
+        [HttpGet(Name = "Get products")]
         public ActionResult<List<Product>> GetProducts()
         {
             return Ok(getAllProductsUseCase.GetAllProducts());
+        }
+
+        [HttpGet("{productId}", Name = "Get product by id")]
+        public ActionResult<Product> GetProductById(Guid productId)
+        {
+            Product product = getProductByIdUseCase.GetProductById(new GetProductByIdUseCase.Query { ProductId = productId});
+
+            return Ok(product);
         }
     }
 }

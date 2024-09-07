@@ -12,3 +12,4 @@ Architecture: Hexagonal.
 - One project for persistence (spefic adapter for output port). 
 
 TODO: Include diagram. 
+TODO: Validation?
