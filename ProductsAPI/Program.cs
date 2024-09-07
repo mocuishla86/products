@@ -11,13 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<GetWeatherForecastUseCase>();
 builder.Services.AddSingleton<CreateProductUseCase>();
 builder.Services.AddSingleton<GetAllProductsUseCase>();
 builder.Services.AddSingleton<GetProductByIdUseCase>();
 builder.Services.AddSingleton<UpdateProductUseCase>();
 builder.Services.AddSingleton<DeleteProductByIdUseCase>();
-builder.Services.AddSingleton<IWeatherForecastRepository, InMemoryWeatherForecastRepository>();
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 
 var app = builder.Build();
