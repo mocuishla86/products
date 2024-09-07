@@ -12,7 +12,8 @@ namespace ProductsAPI.Controllers
         CreateProductUseCase createProductUseCase, 
         GetAllProductsUseCase getAllProductsUseCase,
         GetProductByIdUseCase getProductByIdUseCase,
-        UpdateProductUseCase updateProductUseCase
+        UpdateProductUseCase updateProductUseCase,
+        DeleteProductByIdUseCase deleteProductByIdUseCase
         ) : ControllerBase
     {
 
@@ -68,6 +69,21 @@ namespace ProductsAPI.Controllers
             catch (ProductNotFoundException productNotFoundException)
             {
                 return NotFound(productNotFoundException.Message);
+            };
+        }
+
+        [HttpDelete("{productId}", Name = "Delete product by id")]
+        public ActionResult DeleteProductById(Guid productId)
+        {
+            try
+            {
+                deleteProductByIdUseCase.DeleteProductById(new DeleteProductByIdUseCase.Command { ProductId = productId });
+                return NoContent();
+            }
+            catch (ProductNotFoundException productNotFoundException)
+            {
+                return Ok();
+               // return NotFound(productNotFoundException.Message);
             };
         }
     }

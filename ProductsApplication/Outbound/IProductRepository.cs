@@ -8,5 +8,6 @@ namespace ProductsApplication.Outbound
         List<Product> GetAllProducts();
         Product GetById(Guid productId);
         void Update(Product product);
+        void DeleteById(Guid productId);
     }
 }

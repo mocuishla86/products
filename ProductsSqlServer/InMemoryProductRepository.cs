@@ -33,5 +33,11 @@ namespace ProductsSqlServer
             retrievedProduct.Price = product.Price;
             retrievedProduct.Name = product.Name;
         }
+
+        public void DeleteById(Guid productId)
+        {
+            Product retrievedProduct = GetById(productId);
+            products.Remove(retrievedProduct);
+        }
     }
 }

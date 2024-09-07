@@ -89,4 +89,18 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
         updateRespose.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         (await updateRespose.Content.ReadAsStringAsync()).Should().Contain(nonExistingUuid.ToString());
     }
+
+    [Fact]
+    public async Task AProductCanBeDeleted()
+    {
+        var createResponse = await client.PostAsJsonAsync("/products", new CreateProductRequestDto { Name = "Mazda CX-5", Price = 40000 });
+        var createdProduct = JsonConvert.DeserializeObject<Product>(await createResponse.Content.ReadAsStringAsync());
+        var productId = createdProduct.Id;
+
+        var deleteResponse = await client.DeleteAsync($"/products/{productId}");
+
+        deleteResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        var getResponse = await client.GetAsync($"/products/{productId}");
+        getResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+    }
 }
