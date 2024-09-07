@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductsAPI.Model;
 using ProductsApplication.Inbound;
+using ProductsApplication.Outbound;
 using ProductsDomain;
 
 namespace ProductsAPI.Controllers
@@ -39,9 +40,15 @@ namespace ProductsAPI.Controllers
                 Price = request.Price,
             };
 
-            Product product = updateProductUseCase.UpdateProduct(command);
-
-            return Ok(product);
+            try
+            {
+                Product product = updateProductUseCase.UpdateProduct(command);
+                return Ok(product);
+            }
+            catch (ProductNotFoundException productNotFoundException)
+            {
+                return NotFound(productNotFoundException.Message);
+            };
         }
 
         [HttpGet(Name = "Get products")]

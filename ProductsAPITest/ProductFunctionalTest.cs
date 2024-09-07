@@ -57,7 +57,7 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
     }
 
     [Fact]
-    public async Task IfAProductDoesNotExistThenItReturns404()
+    public async Task RetrievingAnUnexistingProductReturns404()
     {
         var nonExistingProductResponse = await client.GetAsync($"/products/{Guid.NewGuid()}");
 
@@ -78,5 +78,15 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
         retrievedProduct.Id.Should().Be(productId);
         retrievedProduct.Name.Should().Be("New Mazda CX-5");
         retrievedProduct.Price.Should().Be(38000);
+    }
+
+    [Fact]
+    public async Task UpdatingAnUnexistingProductReturns404()
+    {
+        Guid nonExistingUuid = Guid.NewGuid();
+        var updateRespose = await client.PutAsJsonAsync($"/products/{nonExistingUuid}", new UpdateProductRequestDto { Name = "New Mazda CX-5", Price = 38000 });
+
+        updateRespose.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        (await updateRespose.Content.ReadAsStringAsync()).Should().Contain(nonExistingUuid.ToString());
     }
 }

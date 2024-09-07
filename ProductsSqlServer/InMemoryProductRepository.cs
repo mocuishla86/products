@@ -1,4 +1,5 @@
-﻿using ProductsApplication.Outbound;
+﻿using ProductsApplication.Inbound;
+using ProductsApplication.Outbound;
 using ProductsDomain;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace ProductsSqlServer
 
         public void Update(Product product)
         {
-            Product? retrievedProduct = GetById(product.Id);
+            Product retrievedProduct = GetById(product.Id) ?? throw new ProductNotFoundException(product.Id);
             retrievedProduct.Price = product.Price;
             retrievedProduct.Name = product.Name;
         }
