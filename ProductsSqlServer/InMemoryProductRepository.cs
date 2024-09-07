@@ -11,10 +11,14 @@ namespace ProductsSqlServer
     public class InMemoryProductRepository : IProductRepository
     {
         private readonly List<Product> products = new();
-
         public void Insert(Product product)
         {
             products.Add(product);
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            return products;
         }
     }
 }

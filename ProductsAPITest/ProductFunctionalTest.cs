@@ -30,4 +30,15 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
         createdProduct.Name.Should().Be("Mazda CX-5");
         createdProduct.Price.Should().Be(40000);
     }
+
+    [Fact]
+    public async Task AllProducstCanBeRetrieved()
+    {
+        await client.PostAsJsonAsync("/products", new CreateProductRequestDto { Name = "Mazda CX-5", Price = 40000 });
+        await client.PostAsJsonAsync("/products", new CreateProductRequestDto { Name = "Opel Astra", Price = 20000 });
+
+        var products = await client.GetFromJsonAsync<List<Product>>("/products");
+
+        products.Count.Should().Be(2);
+    }
 }

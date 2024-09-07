@@ -7,7 +7,9 @@ namespace ProductsAPI.Controllers
 {
     [ApiController]
     [Route("products")]
-    public class ProductController(CreateProductUseCase createProductUseCase) : ControllerBase
+    public class ProductController(
+        CreateProductUseCase createProductUseCase, 
+        GetAllProductsUseCase getAllProductsUseCase) : ControllerBase
     {
 
         [HttpPost(Name = "Create product")]
@@ -24,6 +26,10 @@ namespace ProductsAPI.Controllers
             return Created(uri, product);
         }
 
-        
+        [HttpGet(Name = "Get Products")]
+        public ActionResult<List<Product>> GetProducts()
+        {
+            return Ok(getAllProductsUseCase.GetAllProducts());
+        }
     }
 }
