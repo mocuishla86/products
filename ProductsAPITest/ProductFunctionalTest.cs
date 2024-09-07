@@ -20,7 +20,7 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
     }
 
     [Fact]
-    public async Task WhenAProductIsCreatedThenItCanBeRetrieved()
+    public async Task AProductCanBeCreated()
     {
         var response =  await client.PostAsJsonAsync("/products", new CreateProductRequestDto { Name = "Mazda CX-5", Price = 40000  });
 
