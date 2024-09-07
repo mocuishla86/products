@@ -21,9 +21,9 @@ namespace ProductsSqlServer
             return products;
         }
 
-        public Product GetById(Guid productId)
+        public Product? GetById(Guid productId)
         {
-            return products.Single(product => product.Id == productId);
+            return products.SingleOrDefault(product => product.Id == productId);
         }
     }
 }

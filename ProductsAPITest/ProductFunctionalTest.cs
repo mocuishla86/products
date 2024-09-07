@@ -55,4 +55,12 @@ public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
         retrievedProduct.Name.Should().Be("Mazda CX-5");
         retrievedProduct.Price.Should().Be(40000);
     }
+
+    [Fact]
+    public async Task IfAProductDoesNotExistThenItReturns404()
+    {
+        var nonExistingProductResponse = await client.GetAsync($"/products/{Guid.NewGuid()}");
+
+        nonExistingProductResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+    }
 }

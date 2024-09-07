@@ -37,7 +37,11 @@ namespace ProductsAPI.Controllers
         [HttpGet("{productId}", Name = "Get product by id")]
         public ActionResult<Product> GetProductById(Guid productId)
         {
-            Product product = getProductByIdUseCase.GetProductById(new GetProductByIdUseCase.Query { ProductId = productId});
+            Product? product = getProductByIdUseCase.GetProductById(new GetProductByIdUseCase.Query { ProductId = productId});
+            if (product == null)
+            {
+                return NotFound();
+            }
 
             return Ok(product);
         }
