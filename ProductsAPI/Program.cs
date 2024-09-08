@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using ProductsApplication.Inbound;
 using ProductsApplication.Outbound;
-using ProductsSqlServer;
+using ProductsSqlServer.Context;
+using ProductsSqlServer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ builder.Services.AddSingleton<GetProductByIdUseCase>();
 builder.Services.AddSingleton<UpdateProductUseCase>();
 builder.Services.AddSingleton<DeleteProductByIdUseCase>();
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+
+var connectionString = builder.Configuration.GetConnectionString("MyAppCs");
+//builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(connectionString))
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ProductsSqlServer")));
 
 var app = builder.Build();
 
