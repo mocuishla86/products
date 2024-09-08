@@ -19,6 +19,7 @@ builder.Services.AddScoped<GetProductByIdUseCase>();
 builder.Services.AddScoped<UpdateProductUseCase>();
 builder.Services.AddScoped<DeleteProductByIdUseCase>();
 builder.Services.AddScoped<IProductRepository, SqlServerProductRepository>();
+builder.Services.AddScoped<IOrderRepository, SqlServerOrderRepository>();
 
 if(!"Test".Equals(builder.Environment.EnvironmentName))
 {
