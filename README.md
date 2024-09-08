@@ -51,7 +51,13 @@ From root:
 
 ```shell
 dotnet ef migrations add Initial --project ProductsSqlServer/ProductsSqlServer.csproj --startup-project ProductsAPI/ProductsAPI.csproj --context ProductsSqlServer.Context.AppDbContext
-````
+```
+
+# how to remove last migration
+
+```shell
+dotnet ef migrations remove --project ProductsSqlServer/ProductsSqlServer.csproj --startup-project ProductsAPI/ProductsAPI.csproj --context ProductsSqlServer.Context.AppDbContext
+```
 
 # Sources
 
