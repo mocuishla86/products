@@ -1,12 +1,5 @@
-﻿using ProductsApplication.Inbound;
-using ProductsApplication.Outbound;
+﻿using ProductsApplication.Outbound;
 using ProductsDomain;
-using ProductsSqlServer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductsSqlServer.Repositories
 {

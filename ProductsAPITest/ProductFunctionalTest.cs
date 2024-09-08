@@ -1,13 +1,9 @@
 ﻿using FluentAssertions;
-using FunctionalTest;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 using ProductsDomain;
 using ProductsAPI.Model;
 using Newtonsoft.Json;
-using DotNet.Testcontainers.Builders;
-using Microsoft.AspNetCore.Mvc.Testing;
-using DotNet.Testcontainers.Containers;
 
 namespace ProductsAPITest;
 

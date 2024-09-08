@@ -1,5 +1,4 @@
 ﻿using ProductsApplication.Outbound;
-using ProductsDomain;
 
 namespace ProductsApplication.Inbound
 {
