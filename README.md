@@ -57,5 +57,6 @@ dotnet ef migrations add Initial --project ProductsSqlServer/ProductsSqlServer.c
 
   - [Functional tests](https://ilovedotnet.org/blogs/functional-testing-your-asp-net-webapi/)
   - [Test containers](https://medium.com/codenx/integration-testing-using-testcontainers-in-net-8-520e8911d081)
+  - [XUnit fixtures](https://xunit.net/docs/shared-context)
   - [Docker-compose and SqlServer](https://samuelbarrerabastidas.medium.com/ms-sql-server-con-docker-compose-2a3213266be3)
   - [Entity Framework](https://medium.com/@lucas.and227/step-by-step-guide-to-entity-framework-in-net-c629faf9f322)

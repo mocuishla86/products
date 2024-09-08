@@ -5,18 +5,20 @@ using System.Net.Http.Json;
 using ProductsDomain;
 using ProductsAPI.Model;
 using Newtonsoft.Json;
+using DotNet.Testcontainers.Builders;
+using Microsoft.AspNetCore.Mvc.Testing;
+using DotNet.Testcontainers.Containers;
 
 namespace ProductsAPITest;
 
 [ExcludeFromCodeCoverage]
-public class ProductFunctionalTest : IClassFixture<TestWebApiFactory>
+public class ProductFunctionalTest : IClassFixture<DatabaseFixture>
 {
-
     private readonly HttpClient client;
 
-    public ProductFunctionalTest(TestWebApiFactory factory)
+    public ProductFunctionalTest(DatabaseFixture databaseFixture)
     {
-         client = factory.CreateClient();
+         client = databaseFixture.Factory.CreateClient();
     }
 
     [Fact]

@@ -20,9 +20,11 @@ builder.Services.AddScoped<UpdateProductUseCase>();
 builder.Services.AddScoped<DeleteProductByIdUseCase>();
 builder.Services.AddScoped<IProductRepository, SqlServerProductRepository>();
 
-var connectionString = builder.Configuration.GetConnectionString("MyAppCs");
-//builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(connectionString))
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ProductsSqlServer")));
+if(!"Test".Equals(builder.Environment.EnvironmentName))
+{
+    var connectionString = builder.Configuration.GetConnectionString("MyAppCs");
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ProductsSqlServer")));
+}
 
 var app = builder.Build();
 
