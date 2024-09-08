@@ -13,12 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<CreateProductUseCase>();
-builder.Services.AddSingleton<GetAllProductsUseCase>();
-builder.Services.AddSingleton<GetProductByIdUseCase>();
-builder.Services.AddSingleton<UpdateProductUseCase>();
-builder.Services.AddSingleton<DeleteProductByIdUseCase>();
-builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddScoped<CreateProductUseCase>();
+builder.Services.AddScoped<GetAllProductsUseCase>();
+builder.Services.AddScoped<GetProductByIdUseCase>();
+builder.Services.AddScoped<UpdateProductUseCase>();
+builder.Services.AddScoped<DeleteProductByIdUseCase>();
+builder.Services.AddScoped<IProductRepository, SqlServerProductRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyAppCs");
 //builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(connectionString))
